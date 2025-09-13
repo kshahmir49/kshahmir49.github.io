@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shahmir Khan — Personal Website</title>
-  <meta name="description" content="Personal academic website for Shahmir Khan: research papers, positions, projects, awards, photos, and contact." />
+  <meta name="description" content="Personal academic website for Shahmir Khan: research papers, projects, awards, photos, and contact." />
   <link rel="canonical" href="https://your-username.github.io/" />
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Shahmir Khan — Personal Website" />
-  <meta property="og:description" content="Research papers, positions, projects, awards, photos, and contact." />
+  <meta property="og:description" content="Research papers, projects, awards, photos, and contact." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://your-username.github.io/" />
   <meta property="og:image" content="https://your-username.github.io/og-image.jpg" />
@@ -77,7 +77,7 @@
     .btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); background: #fff0; color: inherit; padding: 8px 12px; border-radius: 10px; text-decoration: none; }
     .btn.primary { background: var(--accent); color: var(--accent-contrast); border-color: color-mix(in oklab, var(--accent), #000 20%); }
 
-    .papers li + li, .positions li + li, .awards li + li, .edu li + li, .exp li + li, .teaching li + li { margin-top: 14px; }
+    .papers li + li, .awards li + li, .edu li + li, .exp li + li, .teaching li + li { margin-top: 14px; }
     ul.clean { list-style: none; padding: 0; margin: 0; }
 
     .twocol { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -107,7 +107,6 @@
     </div>
     <nav class="nav-links" aria-label="Primary">
       <a href="#research">Research</a>
-      <a href="#positions">Positions</a>
       <a href="#projects">Projects</a>
       <a href="#awards">Awards</a>
       <a href="#education">Education</a>
@@ -127,7 +126,7 @@
       <div class="card">
         <h1>Shahmir Khan Mohammed</h1>
         <p class="lead">Ph.D. Candidate, Computer Science • Khalifa University • Abu Dhabi, UAE</p>
-        <p>Academic Advisors: Dr. Shakti Singh, Dr. Rabeb Mizouni, Prof. Hadi Otrok<p>
+        <p>Academic Advisors: Dr. Shakti Singh, Dr. Rabeb Mizouni, Prof. Hadi Otrok</p>
         <p>Graduate researcher with interests in digital twins, multi-agent systems, reinforcement learning, and generative AI.</p>
       </div>
     </div>
@@ -214,11 +213,6 @@
       ],
       tagline: "Ph.D. Candidate, Computer Science • Khalifa University"
     },
-
-    positions: [
-      { role: "Graduate Research & Teaching Assistant", org: "Khalifa University", url: "https://www.ku.ac.ae/", start: "Aug 2021", end: "Present" },
-      { role: "Ph.D. Candidate, Computer Science", org: "Khalifa University", url: "https://www.ku.ac.ae/", start: "Jan 2023", end: "Present" }
-    ],
 
     research: {
       in_progress: [
@@ -448,7 +442,6 @@
       socialFrag.appendChild(link);
       if (i < SITE_DATA.person.socials.length - 1) socialFrag.appendChild(document.createTextNode(' • '));
     });
-    document.getElementById('socialLinks').replaceChildren(socialFrag);
     const avatar = document.querySelector('.avatar');
     avatar.src = SITE_DATA.person.avatar; avatar.alt = `Portrait of ${SITE_DATA.person.name}`;
   }
