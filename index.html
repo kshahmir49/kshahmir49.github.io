@@ -454,20 +454,6 @@
     avatar.src = SITE_DATA.person.avatar; avatar.alt = `Portrait of ${SITE_DATA.person.name}`;
   }
 
-  function renderPositions() {
-    const list = document.getElementById('positionsList'); list.replaceChildren();
-    SITE_DATA.positions.forEach(p => {
-      const when = [p.start, p.end].filter(Boolean).join(' – ');
-      const line = el('li', {}, [
-        el('div', { class: 'card' }, [
-          el('div', { class: 'meta' }, [when]),
-          el('div', { html: `<strong>${p.role}</strong> at <a href="${p.url || '#'}" target="_blank" rel="noopener">${p.org}</a>` })
-        ])
-      ]);
-      list.appendChild(line);
-    });
-  }
-
   function paperCard(p) {
     const authors = p.authors?.join(', ');
     const parts = [
@@ -593,7 +579,6 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     renderPerson();
-    renderPositions();
     renderPapers();
     renderProjects();
     renderAwards();
