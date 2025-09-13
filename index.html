@@ -87,6 +87,21 @@
     .skip { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
     .skip:focus { position: static; width: auto; height: auto; background: var(--surface); padding: 8px 12px; border-radius: 10px; }
 
+    /* ===== Collapsible sections (accessible disclosure pattern) ===== */
+    section .section-toggle {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; text-align: left;
+      background: var(--surface); color: inherit; border: 1px solid var(--border);
+      border-radius: 12px; padding: 10px 14px; cursor: pointer;
+      font: inherit; font-size: 20px; margin: 0 0 12px 0;
+    }
+    section .section-toggle:focus { outline: 2px solid color-mix(in oklab, var(--accent) 65%, #000 0%); outline-offset: 2px; }
+    section .chev { transition: transform .18s ease; }
+    section.collapsed .chev { transform: rotate(-90deg); }
+
+    /* Hide a section's body while collapsed, but keep its <h2>/<button> visible */
+    section.collapsed > :not(h2):not(.section-toggle) { display: none !important; }
+
     @media (max-width: 980px) {
       .hero { grid-template-columns: 1fr; }
       .nav { gap: 8px; }
@@ -112,6 +127,7 @@
 </header>
 
 <main id="content" class="container">
+  <!-- Always visible on first load -->
   <section class="hero" aria-label="Introduction">
     <div>
       <div class="card">
@@ -126,41 +142,57 @@
     </div>
   </section>
 
+  <!-- Always visible on first load -->
   <section id="research" aria-labelledby="research-h">
-    <h2 id="research-h">Research papers</h2>
+    <button class="section-toggle" id="research-h" aria-expanded="true" aria-controls="research">
+      <span>Research papers</span><span class="chev" aria-hidden="true">▾</span>
+    </button>
     <h3>In-progress</h3>
     <ul class="clean papers" id="papersInProgress"></ul>
     <h3>Peer-reviewed</h3>
     <ul class="clean papers" id="papersPeer"></ul>
   </section>
 
-  <section id="education" aria-labelledby="edu-h">
-    <h2 id="edu-h">Education</h2>
+  <!-- Collapsed by default; revealed on header click -->
+  <section id="education" aria-labelledby="edu-h" class="collapsed">
+    <button class="section-toggle" id="edu-h" aria-expanded="false" aria-controls="education">
+      <span>Education</span><span class="chev" aria-hidden="true">▾</span>
+    </button>
     <ul class="clean edu" id="eduList"></ul>
   </section>
 
-  <section id="experience" aria-labelledby="exp-h">
-    <h2 id="exp-h">Experience</h2>
+  <section id="experience" aria-labelledby="exp-h" class="collapsed">
+    <button class="section-toggle" id="exp-h" aria-expanded="false" aria-controls="experience">
+      <span>Experience</span><span class="chev" aria-hidden="true">▾</span>
+    </button>
     <ul class="clean exp" id="expList"></ul>
   </section>
 
-  <section id="projects" aria-labelledby="projects-h">
-    <h2 id="projects-h">Projects</h2>
+  <section id="projects" aria-labelledby="projects-h" class="collapsed">
+    <button class="section-toggle" id="projects-h" aria-expanded="false" aria-controls="projects">
+      <span>Projects</span><span class="chev" aria-hidden="true">▾</span>
+    </button>
     <div class="grid" id="projectsGrid"></div>
   </section>
 
-  <section id="awards" aria-labelledby="awards-h">
-    <h2 id="awards-h">Awards</h2>
+  <section id="awards" aria-labelledby="awards-h" class="collapsed">
+    <button class="section-toggle" id="awards-h" aria-expanded="false" aria-controls="awards">
+      <span>Awards</span><span class="chev" aria-hidden="true">▾</span>
+    </button>
     <ul class="clean awards" id="awardsList"></ul>
   </section>
 
-  <section id="teaching" aria-labelledby="teach-h">
-    <h2 id="teach-h">Teaching</h2>
+  <section id="teaching" aria-labelledby="teach-h" class="collapsed">
+    <button class="section-toggle" id="teach-h" aria-expanded="false" aria-controls="teaching">
+      <span>Teaching</span><span class="chev" aria-hidden="true">▾</span>
+    </button>
     <ul class="clean teaching" id="teachList"></ul>
   </section>
 
-  <section id="contact" aria-labelledby="contact-h">
-    <h2 id="contact-h">Contact</h2>
+  <section id="contact" aria-labelledby="contact-h" class="collapsed">
+    <button class="section-toggle" id="contact-h" aria-expanded="false" aria-controls="contact">
+      <span>Contact</span><span class="chev" aria-hidden="true">▾</span>
+    </button>
     <div class="card">
       <p><strong>Email (academic):</strong> <a id="emailLink1" href="mailto:100059811@ku.ac.ae">100059811@ku.ac.ae</a></p>
       <p><strong>Email (personal):</strong> <a id="emailLink2" href="mailto:kshahmir49@gmail.com">kshahmir49@gmail.com</a></p>
@@ -176,7 +208,7 @@
 </footer>
 
 <script>
-  // === Data from CV (fill/extend as needed) ==================================
+  // === Data from CV (unchanged) =============================================
   const SITE_DATA = {
     person: {
       name: "Shahmir Khan Mohammed",
@@ -185,173 +217,52 @@
       phone: "+971 50 214 9427",
       location: "Abu Dhabi, UAE",
       avatar: "shahmir.jpg",
-      socials: [
-        // Add your profiles here, e.g. { name: "Google Scholar", url: "https://scholar.google.com/citations?user=XXXX" }
-      ],
+      socials: [],
       tagline: "Ph.D. Candidate, Computer Science • Khalifa University"
     },
-
     research: {
       in_progress: [
-        {
-          title: "Digital Twins Paradigm: A Systematic Review from the Reinforcement Learning Perspective",
-          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
-          venue: "ACM Computing Surveys",
-          note: "(Submitted)"
-        },
-        {
-          title: "Unifying Digital Twins, Generative AI, and Reinforcement Learning for UAV-assisted Effective Real-time Evacuation",
-          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
-          venue: "IEEE Transactions on Vehicular Technology",
-          note: "(Submitted)"
-        }
+        { title: "Digital Twins Paradigm: A Systematic Review from the Reinforcement Learning Perspective", authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"], venue: "ACM Computing Surveys", note: "(Submitted)" },
+        { title: "Unifying Digital Twins, Generative AI, and Reinforcement Learning for UAV-assisted Effective Real-time Evacuation", authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"], venue: "IEEE Transactions on Vehicular Technology", note: "(Submitted)" }
       ],
       peer_reviewed: [
-        {
-          title: "A Deep Learning Framework for Target Localization in Error-Prone Environment",
-          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
-          venue: "Internet of Things",
-          year: 2023,
-          url: "https://www.sciencedirect.com/science/article/abs/pii/S2542660523000367"
-        },
-        {
-          title: "TRACE: Transformer-based Continuous Tracking Framework using IoT and MCS",
-          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
-          venue: "Journal of Network and Computer Applications",
-          year: 2024,
-          url: "https://www.sciencedirect.com/science/article/abs/pii/S1084804523002126"
-        },
-        {
-          title: "Leveraging Blockchain and Deep Learning for UAV-assisted Search and Rescue Missions",
-          authors: ["I. Chaabi", "S. K. Mohammed", "M. Kadadha", "S. Singh", "R. Mizouni", "H. Otrok"],
-          venue: "IEEE MECOM",
-          year: 2024,
-          location: "Abu Dhabi",
-          url: "https://ieeexplore.ieee.org/abstract/document/10882026"
-        },
-        {
-          title: "Autonomous Mobile Inspection of Process Parameters using Reinforcement Learning in Industrial IoT Environment",
-          authors: ["S. Umar", "S. K. Mohammed", "N. Alkaabi", "S. Muhaidat"],
-          venue: "IEEE MECOM",
-          year: 2024,
-          location: "Abu Dhabi",
-          url: "https://ieeexplore.ieee.org/abstract/document/10881535"
-        },
-        {
-          title: "ZS-ACL: Light-weight Zero-shot Image Denoising using alpha-Conditional Loss",
-          authors: ["S. K. Mohammed", "S. Singh"],
-          venue: "International Conference on Image and Vision Computing (IVCNZ)",
-          year: 2024,
-          location: "Canterbury, New Zealand",
-          url: "https://ieeexplore.ieee.org/abstract/document/10794484"
-        },
-        {
-          title: "Source Localization Techniques in IoT: A Survey",
-          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
-          venue: "Graduate Students Research Conference",
-          year: 2022,
-          location: "Dubai",
-          url: "https://uaegsrc.ae/assets/attachments/GSRC%202022%20Program%20Full.pdf"
-        },
-        {
-          title: "TRACE: Transformer-based Continuous Tracking Framework",
-          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
-          venue: "Graduate Students Research Conference (Best Paper – CS&IT Track)",
-          year: 2024,
-          location: "Abu Dhabi",
-          url: "https://uaegsrc.ae/assets/attachments/GSRC-2024-Program.pdf"
-        }
+        { title: "A Deep Learning Framework for Target Localization in Error-Prone Environment", authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"], venue: "Internet of Things", year: 2023, url: "https://www.sciencedirect.com/science/article/abs/pii/S2542660523000367" },
+        { title: "TRACE: Transformer-based Continuous Tracking Framework using IoT and MCS", authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"], venue: "Journal of Network and Computer Applications", year: 2024, url: "https://www.sciencedirect.com/science/article/abs/pii/S1084804523002126" },
+        { title: "Leveraging Blockchain and Deep Learning for UAV-assisted Search and Rescue Missions", authors: ["I. Chaabi", "S. K. Mohammed", "M. Kadadha", "S. Singh", "R. Mizouni", "H. Otrok"], venue: "IEEE MECOM", year: 2024, location: "Abu Dhabi", url: "https://ieeexplore.ieee.org/abstract/document/10882026" },
+        { title: "Autonomous Mobile Inspection of Process Parameters using Reinforcement Learning in Industrial IoT Environment", authors: ["S. Umar", "S. K. Mohammed", "N. Alkaabi", "S. Muhaidat"], venue: "IEEE MECOM", year: 2024, location: "Abu Dhabi", url: "https://ieeexplore.ieee.org/abstract/document/10881535" },
+        { title: "ZS-ACL: Light-weight Zero-shot Image Denoising using alpha-Conditional Loss", authors: ["S. K. Mohammed", "S. Singh"], venue: "International Conference on Image and Vision Computing (IVCNZ)", year: 2024, location: "Canterbury, New Zealand", url: "https://ieeexplore.ieee.org/abstract/document/10794484" },
+        { title: "Source Localization Techniques in IoT: A Survey", authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"], venue: "Graduate Students Research Conference", year: 2022, location: "Dubai", url: "https://uaegsrc.ae/assets/attachments/GSRC%202022%20Program%20Full.pdf" },
+        { title: "TRACE: Transformer-based Continuous Tracking Framework", authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"], venue: "Graduate Students Research Conference (Best Paper – CS&IT Track)", year: 2024, location: "Abu Dhabi", url: "https://uaegsrc.ae/assets/attachments/GSRC-2024-Program.pdf" }
       ]
     },
-
     projects: [
-      {
-        title: "Toronto Streetcar Delay – analysis & prediction",
-        summary: "Studied TTC streetcar delay data to derive insights and build predictive models for reducing delays.",
-        tags: ["Python", "Keras", "Matplotlib"],
-        link: ""
-      },
-      {
-        title: "Set Cover via Iterative Randomized Rounding & LP",
-        summary: "Compared linear programming vs. randomized rounding approaches for set cover; analyzed cost/speed trade-offs.",
-        tags: ["Python", "Algorithms"],
-        link: ""
-      },
-      {
-        title: "Detector-as-Tracker with Faster R-CNN",
-        summary: "Converted an object detector into a tracker to handle illumination, motion blur, and occlusion.",
-        tags: ["PyTorch", "Detectron2", "CUDA"],
-        link: ""
-      },
-      {
-        title: "CAD Prediction on UK Biobank",
-        summary: "Combined geno/phenotype features and ML models (LR, ET, RF, GBDT) achieving strong performance.",
-        tags: ["Python", "Keras", "GWAS"],
-        link: ""
-      },
-      {
-        title: "Blockchain + UAVs for Search & Rescue",
-        summary: "Edge server with blockchain for integrity/resource allocation; YOLOv5n for casualty detection.",
-        tags: ["Solidity", "PyTorch", "Ganache"],
-        link: ""
-      }
+      { title: "Toronto Streetcar Delay – analysis & prediction", summary: "Studied TTC streetcar delay data to derive insights and build predictive models for reducing delays.", tags: ["Python", "Keras", "Matplotlib"], link: "" },
+      { title: "Set Cover via Iterative Randomized Rounding & LP", summary: "Compared linear programming vs. randomized rounding approaches for set cover; analyzed cost/speed trade-offs.", tags: ["Python", "Algorithms"], link: "" },
+      { title: "Detector-as-Tracker with Faster R-CNN", summary: "Converted an object detector into a tracker to handle illumination, motion blur, and occlusion.", tags: ["PyTorch", "Detectron2", "CUDA"], link: "" },
+      { title: "CAD Prediction on UK Biobank", summary: "Combined geno/phenotype features and ML models (LR, ET, RF, GBDT) achieving strong performance.", tags: ["Python", "Keras", "GWAS"], link: "" },
+      { title: "Blockchain + UAVs for Search & Rescue", summary: "Edge server with blockchain for integrity/resource allocation; YOLOv5n for casualty detection.", tags: ["Solidity", "PyTorch", "Ganache"], link: "" }
     ],
-
     awards: [
       { title: "Elite Young Researcher", by: "Graduate Student Research Awards, Khalifa University", year: 2023 },
       { title: "Best Paper Award – 1st Place (CS&IT Track)", by: "Graduate Students Research Conference, UAEU", year: 2024 }
     ],
-
     education: [
-      {
-        degree: "Ph.D. in Computer Science",
-        org: "Khalifa University of Science and Technology",
-        period: "Jan 2023 – Present",
-        cgpa: "3.5/4.0",
-        thesis_title: "Enhancing Digital Twins using Generative AI and Multi‑Agent Systems for Dynamic Environments",
-      },
-      {
-        degree: "M.Sc. in Computer Science",
-        org: "Khalifa University of Science and Technology",
-        period: "Jan 2021 – Dec 2022",
-        cgpa: "3.89/4.0",
-        thesis_title: "Deep Learning Framework for Target Localization and Tracking in Error‑Prone Environments",
-      },
-      {
-        degree: "B.E. in Information Technology",
-        org: "Osmania University, India",
-        period: "Aug 2015 – May 2019",
-        cgpa: "7.71/10"
-      }
+      { degree: "Ph.D. in Computer Science", org: "Khalifa University of Science and Technology", period: "Jan 2023 – Present", cgpa: "3.5/4.0", thesis_title: "Enhancing Digital Twins using Generative AI and Multi-Agent Systems for Dynamic Environments" },
+      { degree: "M.Sc. in Computer Science", org: "Khalifa University of Science and Technology", period: "Jan 2021 – Dec 2022", cgpa: "3.89/4.0", thesis_title: "Deep Learning Framework for Target Localization and Tracking in Error-Prone Environments" },
+      { degree: "B.E. in Information Technology", org: "Osmania University, India", period: "Aug 2015 – May 2019", cgpa: "7.71/10" }
     ],
-
     experience: [
-      {
-        role: "Graduate Research & Teaching Assistant",
-        org: "Khalifa University",
-        period: "Aug 2021 – Present"
-      },
-      {
-        role: "Backend Engineer",
-        org: "Tata Consultancy Services (client: Apple Inc.)",
-        period: "Aug 2019 – Dec 2020",
-        bullets: [
+      { role: "Graduate Research & Teaching Assistant", org: "Khalifa University", period: "Aug 2021 – Present" },
+      { role: "Backend Engineer", org: "Tata Consultancy Services (client: Apple Inc.)", period: "Aug 2019 – Dec 2020", bullets: [
           "Built 25+ backend APIs; contributed to 4 production releases",
           "Debugged test/prod issues using Splunk; deployments via Jenkins",
           "Stack: Spring (Boot), MyBatis, OracleSQL, MongoDB, Docker, Git"
-        ]
-      },
-      {
-        role: "Intern",
-        org: "ADRIN (Advanced Data Processing & Research Institute), ISRO",
-        period: "Jan 2019 – Apr 2019",
-        bullets: [
-          "Multi‑Drone mission planning; feature matching with OpenCV",
+        ] },
+      { role: "Intern", org: "ADRIN (Advanced Data Processing & Research Institute), ISRO", period: "Jan 2019 – Apr 2019", bullets: [
+          "Multi-Drone mission planning; feature matching with OpenCV",
           "Built/ran CNN models on Raspberry Pi with RaspiCam for autonomous flight"
-        ]
-      }
+        ] }
     ],
-
     teaching: [
       "Teaching assistant for 6 semesters - Intro to Programming with Python",
       "Lab coordinator and instructor for 2 semesters - Intro to Programming with Python",
@@ -365,13 +276,15 @@
   const el = (tag, attrs = {}, children = []) => {
     const node = document.createElement(tag);
     Object.entries(attrs).forEach(([k,v]) => {
-      if (k === 'class') node.className = v; else if (k === 'html') node.innerHTML = v; else node.setAttribute(k, v);
+      if (k === 'class') node.className = v;
+      else if (k === 'html') node.innerHTML = v;
+      else node.setAttribute(k, v);
     });
     children.forEach(c => node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
     return node;
   };
 
-  // === Renderers ============================================================
+  // === Renderers (unchanged) ===============================================
   function renderPerson() {
     document.title = `${SITE_DATA.person.name} — Personal Website`;
     document.querySelector('h1').textContent = SITE_DATA.person.name;
@@ -381,12 +294,6 @@
     document.getElementById('emailLink2').textContent = SITE_DATA.person.email2;
     document.getElementById('emailLink2').href = `mailto:${SITE_DATA.person.email2}`;
     document.getElementById('locationBlock').innerHTML = `<strong>Location:</strong> ${SITE_DATA.person.location}`;
-    const socialFrag = document.createDocumentFragment();
-    SITE_DATA.person.socials.forEach((s, i) => {
-      const link = el('a', { href: s.url, target: '_blank', rel: 'noopener' }, [s.name]);
-      socialFrag.appendChild(link);
-      if (i < SITE_DATA.person.socials.length - 1) socialFrag.appendChild(document.createTextNode(' • '));
-    });
     const avatar = document.querySelector('.avatar');
     avatar.src = SITE_DATA.person.avatar; avatar.alt = `Portrait of ${SITE_DATA.person.name}`;
   }
@@ -413,7 +320,6 @@
   function renderPapers() {
     const inprog = document.getElementById('papersInProgress'); inprog.replaceChildren();
     SITE_DATA.research.in_progress.forEach(p => inprog.appendChild(el('li', {}, [paperCard(p)])));
-
     const peer = document.getElementById('papersPeer'); peer.replaceChildren();
     SITE_DATA.research.peer_reviewed
       .sort((a,b) => (b.year||0)-(a.year||0))
@@ -492,7 +398,42 @@
 
   function renderFooterYear(){ document.getElementById('year').textContent = new Date().getFullYear(); }
 
+  // === Collapsible behavior =================================================
+  function toggleSection(sec, forceOpen = null) {
+    const btn = sec.querySelector('.section-toggle');
+    const willOpen = forceOpen !== null ? forceOpen : sec.classList.contains('collapsed');
+    sec.classList.toggle('collapsed', !willOpen);
+    btn.setAttribute('aria-expanded', String(willOpen));
+  }
+
+  function initCollapsibles() {
+    // Make all section headers keyboard- and screen-reader-friendly
+    document.querySelectorAll('section .section-toggle').forEach(btn => {
+      const sec = btn.closest('section');
+      btn.addEventListener('click', () => toggleSection(sec));
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSection(sec); }
+      });
+    });
+
+    // Clicking a top-nav anchor also opens the section
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
+      a.addEventListener('click', () => {
+        const id = a.getAttribute('href').slice(1);
+        const sec = document.getElementById(id);
+        if (sec) toggleSection(sec, true); // ensure open
+      });
+    });
+
+    // If the page loads with a hash (deep link), open that section
+    if (location.hash) {
+      const sec = document.getElementById(location.hash.slice(1));
+      if (sec) toggleSection(sec, true);
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
+    // Render data
     renderPerson();
     renderPapers();
     renderProjects();
@@ -502,6 +443,9 @@
     renderTeaching();
     initTheme();
     renderFooterYear();
+
+    // Activate collapsibles
+    initCollapsibles();
   });
 </script>
 
@@ -514,11 +458,7 @@
   "email": ["mailto:100059811@ku.ac.ae", "mailto:kshahmir49@gmail.com"],
   "url": "https://kshahmir49.github.io/",
   "affiliation": {"@type":"Organization","name":"Khalifa University of Science and Technology"},
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Abu Dhabi",
-    "addressCountry": "AE"
-  }
+  "address": {"@type": "PostalAddress","addressLocality": "Abu Dhabi","addressCountry": "AE"}
 }
 </script>
 </body>
