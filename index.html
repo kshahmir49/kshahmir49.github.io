@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shahmir Khan — Personal Website</title>
-  <meta name="description" content="Personal academic website for Shahmir Khan: research papers, projects, awards, photos, and contact." />
+  <meta name="description" content="Personal academic website for Shahmir Khan: research papers, projects, awards, and contact." />
   <link rel="canonical" href="https://your-username.github.io/" />
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Shahmir Khan — Personal Website" />
-  <meta property="og:description" content="Research papers, projects, awards, photos, and contact." />
+  <meta property="og:description" content="Research papers, projects, awards, and contact." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://your-username.github.io/" />
   <meta property="og:image" content="https://your-username.github.io/og-image.jpg" />
@@ -82,9 +82,6 @@
 
     .twocol { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-    .gallery { columns: 3 260px; column-gap: 12px; }
-    .gallery img { width: 100%; margin: 0 0 12px; border-radius: 12px; border: 1px solid var(--border); }
-
     footer { border-top: 1px solid var(--border); padding: 24px 0 48px; color: var(--muted); }
 
     .skip { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
@@ -108,7 +105,6 @@
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#teaching">Teaching</a>
-      <a href="#photos">Gallery</a>
       <a href="#contact">Contact</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">Toggle theme</button>
     </nav>
@@ -163,11 +159,6 @@
     <ul class="clean teaching" id="teachList"></ul>
   </section>
 
-  <section id="photos" aria-labelledby="photos-h">
-    <h2 id="photos-h">Photos</h2>
-    <div class="gallery" id="gallery"></div>
-  </section>
-
   <section id="contact" aria-labelledby="contact-h">
     <h2 id="contact-h">Contact</h2>
     <div class="card">
@@ -180,7 +171,7 @@
 
 <footer>
   <div class="container">
-    <div>© <span id="year"></span> Mohammed Shahmir Khan. Built with pure HTML/CSS/JS & hosted on GitHub Pages.</div>
+    <div>© <span id="year"></span> Mohammed Shahmir Khan. Hosted on GitHub Pages.</div>
   </div>
 </footer>
 
@@ -366,12 +357,6 @@
       "Lab coordinator and instructor for 2 semesters - Intro to Programming with Python",
       "Teaching assistant for 1 semester - Database Management Systems",
       "Teaching assistant for 1 semester - Programming with C++"
-    ],
-
-    photos: [
-      { src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop", alt: "Sunrise over mountains" },
-      { src: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop", alt: "City skyline at dusk" },
-      { src: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop", alt: "Books and laptop on desk" }
     ]
   };
 
@@ -490,11 +475,6 @@
     SITE_DATA.teaching.forEach(t => list.appendChild(el('li', {}, [ el('div', { class:'card' }, [t]) ])));
   }
 
-  function renderPhotos() {
-    const g = document.getElementById('gallery'); g.replaceChildren();
-    SITE_DATA.photos.forEach(ph => g.appendChild(el('img', { src: ph.src, alt: ph.alt || '' })));
-  }
-
   function initTheme() {
     const saved = localStorage.getItem('theme');
     if (saved) document.documentElement.setAttribute('data-theme', saved);
@@ -519,7 +499,6 @@
     renderEducation();
     renderExperience();
     renderTeaching();
-    renderPhotos();
     initTheme();
     renderFooterYear();
   });
