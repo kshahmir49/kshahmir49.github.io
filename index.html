@@ -309,7 +309,6 @@
         period: "Jan 2023 – Present",
         cgpa: "3.5/4.0",
         thesis_title: "Enhancing Digital Twins using Generative AI and Multi‑Agent Systems for Dynamic Environments",
-        thesis_abstract: "Digital twins enable real-time monitoring/simulation but face challenges modeling dynamic environments and autonomy; this work applies Generative AI and heterogeneous multi‑agent design to address these.",
       },
       {
         degree: "M.Sc. in Computer Science",
@@ -317,7 +316,6 @@
         period: "Jan 2021 – Dec 2022",
         cgpa: "3.89/4.0",
         thesis_title: "Deep Learning Framework for Target Localization and Tracking in Error‑Prone Environments",
-        thesis_desc: "Three‑phase pipeline for accurate, efficient localization and tracking in IoT/MCS using CDAE, CNNs, and Transformers.",
       },
       {
         degree: "B.E. in Information Technology",
@@ -460,9 +458,7 @@
       const body = el('div', { class:'card' }, [
         el('div', { class:'meta' }, [e.period + (e.cgpa ? ` • CGPA: ${e.cgpa}` : '')]),
         el('div', { html: `<strong>${e.degree}</strong> at ${e.org}` }),
-        e.thesis_title ? el('div', { class:'meta' }, ["Thesis: " + e.thesis_title]) : null,
-        e.thesis_desc ? el('div', { class:'meta' }, [e.thesis_desc]) : null,
-        e.thesis_abstract ? el('div', { class:'meta' }, [e.thesis_abstract]) : null
+        e.thesis_title ? el('div', { class:'meta' }, ["Thesis: " + e.thesis_title]) : null
       ].filter(Boolean));
       list.appendChild(el('li', {}, [body]));
     });
