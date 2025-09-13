@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Your Name — Personal Website</title>
-  <meta name="description" content="Personal academic website for Your Name: research papers, positions, projects, awards, photos, and contact." />
+  <title>Mohammed Shahmir Khan — Personal Website</title>
+  <meta name="description" content="Personal academic website for Mohammed Shahmir Khan: research papers, positions, projects, awards, photos, and contact." />
   <link rel="canonical" href="https://your-username.github.io/" />
   <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Your Name — Personal Website" />
+  <meta property="og:title" content="Mohammed Shahmir Khan — Personal Website" />
   <meta property="og:description" content="Research papers, positions, projects, awards, photos, and contact." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://your-username.github.io/" />
@@ -23,7 +23,7 @@
       --border: #e8e8ec;
       --accent: #4f46e5; /* indigo */
       --accent-contrast: #ffffff;
-      --maxw: 1000px;
+      --maxw: 1100px;
       --radius: 16px;
       --shadow: 0 8px 24px rgba(0,0,0,.08);
     }
@@ -69,6 +69,7 @@
 
     section { padding: 28px 0; }
     section h2 { font-size: 22px; margin: 0 0 16px; }
+    section h3 { font-size: 18px; margin: 8px 0 12px; color: var(--muted); }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
     .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
     .meta { color: var(--muted); font-size: 14px; }
@@ -76,8 +77,10 @@
     .btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); background: #fff0; color: inherit; padding: 8px 12px; border-radius: 10px; text-decoration: none; }
     .btn.primary { background: var(--accent); color: var(--accent-contrast); border-color: color-mix(in oklab, var(--accent), #000 20%); }
 
-    .papers li + li, .positions li + li, .awards li + li { margin-top: 14px; }
+    .papers li + li, .positions li + li, .awards li + li, .edu li + li, .exp li + li, .teaching li + li { margin-top: 14px; }
     ul.clean { list-style: none; padding: 0; margin: 0; }
+
+    .twocol { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
     .gallery { columns: 3 260px; column-gap: 12px; }
     .gallery img { width: 100%; margin: 0 0 12px; border-radius: 12px; border: 1px solid var(--border); }
@@ -87,9 +90,10 @@
     .skip { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
     .skip:focus { position: static; width: auto; height: auto; background: var(--surface); padding: 8px 12px; border-radius: 10px; }
 
-    @media (max-width: 820px) {
+    @media (max-width: 980px) {
       .hero { grid-template-columns: 1fr; }
       .nav { gap: 8px; }
+      .twocol { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -99,13 +103,17 @@
   <div class="container nav">
     <div class="brand" aria-label="Home">
       <span class="dot" aria-hidden="true"></span>
-      <span>Your Name</span>
+      <span>Mohammed Shahmir Khan</span>
     </div>
     <nav class="nav-links" aria-label="Primary">
       <a href="#research">Research</a>
       <a href="#positions">Positions</a>
       <a href="#projects">Projects</a>
       <a href="#awards">Awards</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#skills">Skills</a>
       <a href="#photos">Photos</a>
       <a href="#contact">Contact</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">Toggle theme</button>
@@ -117,23 +125,27 @@
   <section class="hero" aria-label="Introduction">
     <div>
       <div class="card">
-        <h1>Your Name</h1>
-        <p class="lead">Your current position(s) • Your Institution or Company • Your City</p>
-        <p>Brief bio: one or two sentences about your research interests and what drives your work.</p>
+        <h1>Mohammed Shahmir Khan</h1>
+        <p class="lead">Ph.D. Candidate, Computer Science • Khalifa University • Abu Dhabi, UAE</p>
+        <p>Graduate researcher focusing on bridging Deep Learning and IoT, with interests in Digital Twins, multi-agent systems, and reinforcement learning.</p>
         <div class="btn-row">
           <a class="btn primary" href="#research">View research</a>
           <a class="btn" href="#contact">Get in touch</a>
+          <a class="btn" href="cv/Shahmir_CV.pdf">Download CV</a>
         </div>
       </div>
     </div>
     <div style="display:flex;justify-content:center">
-      <img class="avatar" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=600&auto=format&fit=crop" alt="Portrait of Your Name"/>
+      <img class="avatar" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=600&auto=format&fit=crop" alt="Portrait of Mohammed Shahmir Khan"/>
     </div>
   </section>
 
   <section id="research" aria-labelledby="research-h">
     <h2 id="research-h">Research papers</h2>
-    <ul class="clean papers" id="papersList"></ul>
+    <h3>In-progress</h3>
+    <ul class="clean papers" id="papersInProgress"></ul>
+    <h3>Peer-reviewed</h3>
+    <ul class="clean papers" id="papersPeer"></ul>
   </section>
 
   <section id="positions" aria-labelledby="positions-h">
@@ -151,6 +163,29 @@
     <ul class="clean awards" id="awardsList"></ul>
   </section>
 
+  <section id="education" aria-labelledby="edu-h">
+    <h2 id="edu-h">Education</h2>
+    <ul class="clean edu" id="eduList"></ul>
+  </section>
+
+  <section id="experience" aria-labelledby="exp-h">
+    <h2 id="exp-h">Experience</h2>
+    <ul class="clean exp" id="expList"></ul>
+  </section>
+
+  <section id="teaching" aria-labelledby="teach-h">
+    <h2 id="teach-h">Teaching</h2>
+    <ul class="clean teaching" id="teachList"></ul>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-h">
+    <h2 id="skills-h">Skills & Coursework</h2>
+    <div class="twocol">
+      <div class="card" id="skillsList"></div>
+      <div class="card" id="courseworkList"></div>
+    </div>
+  </section>
+
   <section id="photos" aria-labelledby="photos-h">
     <h2 id="photos-h">Photos</h2>
     <div class="gallery" id="gallery"></div>
@@ -159,8 +194,10 @@
   <section id="contact" aria-labelledby="contact-h">
     <h2 id="contact-h">Contact</h2>
     <div class="card">
-      <p><strong>Email:</strong> <a id="emailLink" href="mailto:your.email@example.com">your.email@example.com</a></p>
-      <p id="locationBlock"><strong>Location:</strong> Your City, Country</p>
+      <p><strong>Email (academic):</strong> <a id="emailLink1" href="mailto:100059811@ku.ac.ae">100059811@ku.ac.ae</a></p>
+      <p><strong>Email (personal):</strong> <a id="emailLink2" href="mailto:kshahmir49@gmail.com">kshahmir49@gmail.com</a></p>
+      <p><strong>Phone:</strong> <a href="tel:+971502149427">+971 50 214 9427</a></p>
+      <p id="locationBlock"><strong>Location:</strong> Abu Dhabi, UAE</p>
       <p><strong>Elsewhere:</strong> <span id="socialLinks"></span></p>
     </div>
   </section>
@@ -168,83 +205,221 @@
 
 <footer>
   <div class="container">
-    <div>© <span id="year"></span> Your Name. Built with pure HTML/CSS/JS & hosted on GitHub Pages.</div>
+    <div>© <span id="year"></span> Mohammed Shahmir Khan. Built with pure HTML/CSS/JS & hosted on GitHub Pages.</div>
   </div>
 </footer>
 
 <script>
-  // === Quick-start instructions ============================================
-  // 1) Replace the placeholder values in SITE_DATA below with your info.
-  // 2) Add your PDFs/images to the repo (e.g., /papers/*.pdf, /images/*) and
-  //    update the corresponding links.
-  // 3) Commit this single index.html to your GitHub Pages repository.
-
+  // === Data from CV (fill/extend as needed) ==================================
   const SITE_DATA = {
     person: {
-      name: "Shahmir Khan Mohammed",
-      email: "kshahmir49@gmail.com",
+      name: "Mohammed Shahmir Khan",
+      email1: "100059811@ku.ac.ae",
+      email2: "kshahmir49@gmail.com",
+      phone: "+971 50 214 9427",
       location: "Abu Dhabi, UAE",
       avatar: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=600&auto=format&fit=crop",
       socials: [
-        { name: "Google Scholar", url: "https://scholar.google.com/citations?user=lU6d2EYAAAAJ" },
-        { name: "GitHub", url: "https://github.com/kshahmir49" },
-        { name: "LinkedIn", url: "https://www.linkedin.com/in/shahmir-khan-mohammed-6610b3142/" }
+        // Add your profiles here, e.g. { name: "Google Scholar", url: "https://scholar.google.com/citations?user=XXXX" }
       ],
-      tagline: "PhD Candidate • Khalifa University"
+      tagline: "Ph.D. Candidate, Computer Science • Khalifa University"
     },
 
     positions: [
-      { role: "PhD Candidate", org: "Khalifa University", since: " Jan 2023 - Present" },
-      { role: "Graduate Teaching Assistant", org: "Khalifa University", url: "https://example.edu", since: " Aug 2021 - Present" },
-      { role: "MSc Computer Science (Aritificial Intelligence Track)", org: "Khalifa University", since: "Jan 2021 - Dec 2022" },
-      { role: "Backend Engineer - Java", org: "Tata Consultancy Services (Client: Apple Inc.)", since: "Aug 2019- Dec 2020" }
+      { role: "Graduate Research & Teaching Assistant", org: "Khalifa University", url: "https://www.ku.ac.ae/", start: "Aug 2021", end: "Present" },
+      { role: "Ph.D. Candidate, Computer Science", org: "Khalifa University", url: "https://www.ku.ac.ae/", start: "Jan 2023", end: "Present" }
     ],
 
-    papers: [
-      {
-        title: "A Simple Baseline for XYZ",
-        authors: ["Your Name", "Coauthor A", "Coauthor B"],
-        venue: "NeurIPS",
-        year: 2024,
-        links: {
-          pdf: "papers/simple-baseline.pdf",
-          doi: "https://doi.org/10.0000/xyz",
-          code: "https://github.com/your-username/xyz-baseline",
-          slides: "papers/simple-baseline-slides.pdf"
+    research: {
+      in_progress: [
+        {
+          title: "Digital Twins Paradigm: A Systematic Review from the Reinforcement Learning Perspective",
+          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
+          venue: "ACM Computing Surveys",
+          note: "(Submitted)"
         },
-        bibtex: `@inproceedings{you2024baseline,\n  title={A Simple Baseline for XYZ},\n  author={You, Your Name and A, Coauthor and B, Coauthor},\n  booktitle={NeurIPS},\n  year={2024}\n}`
-      },
-      {
-        title: "Understanding ABC with DEF",
-        authors: ["Your Name", "Coauthor C"],
-        venue: "ICLR",
-        year: 2023,
-        links: {
-          pdf: "papers/abc-def.pdf",
-          openreview: "https://openreview.net/…"
+        {
+          title: "Unifying Digital Twins, Generative AI, and Reinforcement Learning for UAV-assisted Effective Real-time Evacuation",
+          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
+          venue: "IEEE Transactions on Vehicular Technology",
+          note: "(Submitted)"
         }
-      }
-    ],
+      ],
+      peer_reviewed: [
+        {
+          title: "A Deep Learning Framework for Target Localization in Error-Prone Environment",
+          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
+          venue: "Internet of Things",
+          year: 2023
+        },
+        {
+          title: "TRACE: Transformer-based Continuous Tracking Framework using IoT and MCS",
+          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
+          venue: "Journal of Network and Computer Applications"
+        },
+        {
+          title: "Leveraging Blockchain and Deep Learning for UAV-assisted Search and Rescue Missions",
+          authors: ["I. Chaabi", "S. K. Mohammed", "M. Kadadha", "S. Singh", "R. Mizouni", "H. Otrok"],
+          venue: "IEEE MECOM",
+          year: 2024,
+          location: "Abu Dhabi"
+        },
+        {
+          title: "Autonomous Mobile Inspection of Process Parameters using Reinforcement Learning in Industrial IoT Environment",
+          authors: ["S. Umar", "S. K. Mohammed", "N. Alkaabi", "S. Muhaidat"],
+          venue: "IEEE MECOM",
+          year: 2024,
+          location: "Abu Dhabi"
+        },
+        {
+          title: "ZS-ACL: Light-weight Zero-shot Image Denoising using alpha-Conditional Loss",
+          authors: ["S. K. Mohammed", "S. Singh"],
+          venue: "International Conference on Image and Vision Computing (IVCNZ)",
+          year: 2024,
+          location: "Canterbury, New Zealand"
+        },
+        {
+          title: "Source Localization Techniques in IoT: A Survey",
+          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
+          venue: "Graduate Students Research Conference",
+          year: 2022,
+          location: "Dubai"
+        },
+        {
+          title: "TRACE: Transformer-based Continuous Tracking Framework",
+          authors: ["S. K. Mohammed", "S. Singh", "R. Mizouni", "H. Otrok"],
+          venue: "Graduate Students Research Conference (Best Paper – CS&IT Track)",
+          year: 2024,
+          location: "Abu Dhabi"
+        }
+      ]
+    },
 
     projects: [
       {
-        title: "Project Aurora",
-        summary: "A lightweight library that accelerates training for small models.",
-        tags: ["Python", "Optimization"],
-        link: "https://github.com/your-username/aurora"
+        title: "Toronto Streetcar Delay – analysis & prediction",
+        summary: "Studied TTC streetcar delay data to derive insights and build predictive models for reducing delays.",
+        tags: ["Python", "Keras", "Matplotlib"],
+        link: ""
       },
       {
-        title: "DataViz Kit",
-        summary: "Reusable visualization components for academic figures.",
-        tags: ["TypeScript", "D3"],
-        link: "https://github.com/your-username/dataviz-kit"
+        title: "Set Cover via Iterative Randomized Rounding & LP",
+        summary: "Compared linear programming vs. randomized rounding approaches for set cover; analyzed cost/speed trade-offs.",
+        tags: ["Python", "Algorithms"],
+        link: ""
+      },
+      {
+        title: "Detector-as-Tracker with Faster R-CNN",
+        summary: "Converted an object detector into a tracker to handle illumination, motion blur, and occlusion.",
+        tags: ["PyTorch", "Detectron2", "CUDA"],
+        link: ""
+      },
+      {
+        title: "CAD Prediction on UK Biobank",
+        summary: "Combined geno/phenotype features and ML models (LR, ET, RF, GBDT) achieving strong performance.",
+        tags: ["Python", "Keras", "GWAS"],
+        link: ""
+      },
+      {
+        title: "Blockchain + UAVs for Search & Rescue",
+        summary: "Edge server with blockchain for integrity/resource allocation; YOLOv5n for casualty detection.",
+        tags: ["Solidity", "PyTorch", "Ganache"],
+        link: ""
       }
     ],
 
     awards: [
-      { title: "Best Paper Award", by: "AwesomeConf", year: 2024, url: "https://awesomeconf.example.com" },
-      { title: "Dean's List", by: "Awesome University", year: 2022 }
+      { title: "Elite Young Researcher", by: "Graduate Student Research Awards, Khalifa University", year: 2023 },
+      { title: "Best Paper Award – 1st Place (CS&IT Track)", by: "Graduate Students Research Conference, UAEU", year: 2024 }
     ],
+
+    education: [
+      {
+        degree: "Ph.D. in Computer Science",
+        org: "Khalifa University of Science and Technology",
+        period: "Jan 2023 – Present",
+        cgpa: "3.5/4.0",
+        thesis_title: "Enhancing Digital Twins using Generative AI and Multi‑Agent Systems for Dynamic Environments",
+        thesis_abstract: "Digital twins enable real-time monitoring/simulation but face challenges modeling dynamic environments and autonomy; this work applies Generative AI and heterogeneous multi‑agent design to address these.",
+      },
+      {
+        degree: "M.Sc. in Computer Science",
+        org: "Khalifa University of Science and Technology",
+        period: "Jan 2021 – Dec 2022",
+        cgpa: "3.89/4.0",
+        thesis_title: "Deep Learning Framework for Target Localization and Tracking in Error‑Prone Environments",
+        thesis_desc: "Three‑phase pipeline for accurate, efficient localization and tracking in IoT/MCS using CDAE, CNNs, and Transformers.",
+      },
+      {
+        degree: "B.E. in Information Technology",
+        org: "Osmania University, India",
+        period: "Aug 2015 – May 2019",
+        cgpa: "7.71/10"
+      }
+    ],
+
+    experience: [
+      {
+        role: "Graduate Research & Teaching Assistant",
+        org: "Khalifa University",
+        period: "Aug 2021 – Present",
+        bullets: [
+          "Conducted labs for C++, DBMS, and Python courses",
+          "Research bridging Deep Learning and IoT (data fusion, localization, tracking)",
+          "Published in high‑impact venues; presented at conferences"
+        ]
+      },
+      {
+        role: "Backend Engineer",
+        org: "Tata Consultancy Services (client: Apple Inc.)",
+        period: "Aug 2019 – Dec 2020",
+        bullets: [
+          "Built 25+ backend APIs; contributed to 4 production releases",
+          "Debugged test/prod issues using Splunk; deployments via Jenkins",
+          "Stack: Spring (Boot), MyBatis, OracleSQL, MongoDB, Docker, Git"
+        ]
+      },
+      {
+        role: "Intern – ADRIN (Advanced Data Processing & Research Institute), ISRO",
+        org: "ISRO",
+        period: "Jan 2019 – Apr 2019",
+        bullets: [
+          "Multi‑Drone mission planning; feature matching with OpenCV",
+          "Built/ran CNN models on Raspberry Pi with RaspiCam for autonomous flight"
+        ]
+      }
+    ],
+
+    teaching: [
+      "3 years teaching COSC114 – Intro to Programming with Python (created slides with instructor Dr. Shakti)",
+      "Conducted labs for Database Management Systems and Programming with C++",
+      "Python Lab coordinator managing 30 TAs and 400 students"
+    ],
+
+    coursework: [
+      "Machine Learning",
+      "Artificial Intelligence",
+      "Deep Learning",
+      "Algorithms in Bioinformatics",
+      "Engineering Numerical Methods",
+      "Algorithm Design Techniques",
+      "Data Science",
+      "Distributed Systems and Cloud Computing",
+      "Software Engineering",
+      "Business Analytics",
+      "Blockchain Fundamentals and Applications",
+      "Advanced Computer Vision Paradigms",
+      "Advance Computer Networks",
+      "High Performance Computing"
+    ],
+
+    skills: {
+      languages: ["C", "C++", "Java", "Python", "SQL", "Solidity"],
+      frameworks: ["Spring", "Spring Boot", "Django", "PyTorch", "Keras", "TensorFlow", "Angular", "Unity"],
+      platforms: ["Windows", "Linux", "macOS"],
+      ides: ["Visual Studio", "NetBeans", "PyCharm", "Jupyter", "Eclipse", "Remix IDE"],
+      misc: ["Data Structures & Algorithms", "Competitive Programming"]
+    },
 
     photos: [
       { src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop", alt: "Sunrise over mountains" },
@@ -253,7 +428,7 @@
     ]
   };
 
-  // === Renderers =============================================================
+  // === Helpers ==============================================================
   const $ = s => document.querySelector(s);
   const el = (tag, attrs = {}, children = []) => {
     const node = document.createElement(tag);
@@ -264,31 +439,35 @@
     return node;
   };
 
+  // === Renderers ============================================================
   function renderPerson() {
     document.title = `${SITE_DATA.person.name} — Personal Website`;
     document.querySelector('.brand span:last-child').textContent = SITE_DATA.person.name;
-    $('h1').textContent = SITE_DATA.person.name;
-    $('.lead').textContent = SITE_DATA.person.tagline || '';
-    $('#emailLink').textContent = SITE_DATA.person.email;
-    $('#emailLink').href = `mailto:${SITE_DATA.person.email}`;
-    $('#locationBlock').innerHTML = `<strong>Location:</strong> ${SITE_DATA.person.location}`;
+    document.querySelector('h1').textContent = SITE_DATA.person.name;
+    document.querySelector('.lead').textContent = SITE_DATA.person.tagline || '';
+    document.getElementById('emailLink1').textContent = SITE_DATA.person.email1;
+    document.getElementById('emailLink1').href = `mailto:${SITE_DATA.person.email1}`;
+    document.getElementById('emailLink2').textContent = SITE_DATA.person.email2;
+    document.getElementById('emailLink2').href = `mailto:${SITE_DATA.person.email2}`;
+    document.getElementById('locationBlock').innerHTML = `<strong>Location:</strong> ${SITE_DATA.person.location}`;
     const socialFrag = document.createDocumentFragment();
     SITE_DATA.person.socials.forEach((s, i) => {
       const link = el('a', { href: s.url, target: '_blank', rel: 'noopener' }, [s.name]);
       socialFrag.appendChild(link);
       if (i < SITE_DATA.person.socials.length - 1) socialFrag.appendChild(document.createTextNode(' • '));
     });
-    $('#socialLinks').replaceChildren(socialFrag);
-    const avatar = $('.avatar');
+    document.getElementById('socialLinks').replaceChildren(socialFrag);
+    const avatar = document.querySelector('.avatar');
     avatar.src = SITE_DATA.person.avatar; avatar.alt = `Portrait of ${SITE_DATA.person.name}`;
   }
 
   function renderPositions() {
-    const list = $('#positionsList'); list.replaceChildren();
+    const list = document.getElementById('positionsList'); list.replaceChildren();
     SITE_DATA.positions.forEach(p => {
+      const when = [p.start, p.end].filter(Boolean).join(' – ');
       const line = el('li', {}, [
         el('div', { class: 'card' }, [
-          el('div', { class: 'meta' }, [`Since ${p.since}`]),
+          el('div', { class: 'meta' }, [when]),
           el('div', { html: `<strong>${p.role}</strong> at <a href="${p.url || '#'}" target="_blank" rel="noopener">${p.org}</a>` })
         ])
       ]);
@@ -296,35 +475,34 @@
     });
   }
 
-  function renderPapers() {
-    const list = $('#papersList'); list.replaceChildren();
-    SITE_DATA.papers.sort((a,b) => (b.year||0)-(a.year||0)).forEach(p => {
-      const authors = p.authors?.join(', ');
-      const head = el('div', { class:'card' }, [
-        el('div', { class: 'meta' }, [`${p.venue || ''} ${p.year || ''}`]),
-        el('div', { html: `<strong>${p.title}</strong>` }),
-        authors ? el('div', { class:'meta' }, [authors]) : null,
-      ].filter(Boolean));
-
+  function paperCard(p) {
+    const authors = p.authors?.join(', ');
+    const parts = [
+      el('div', { class: 'meta' }, [ [p.venue, p.year].filter(Boolean).join(' • ') ]),
+      el('div', { html: `<strong>${p.title}</strong> ${p.note ? `<span class="meta">${p.note}</span>` : ''}` }),
+      authors ? el('div', { class:'meta' }, [authors]) : null
+    ].filter(Boolean);
+    const head = el('div', { class:'card' }, parts);
+    if (p.links) {
       const btns = el('div', { class: 'btn-row' });
-      const L = p.links || {};
-      Object.entries({ PDF: L.pdf, DOI: L.doi, Code: L.code, Slides: L.slides, Review: L.openreview }).forEach(([label, url]) => {
-        if (!url) return;
-        btns.appendChild(el('a', { class: 'btn', href: url, target: '_blank', rel:'noopener' }, [label]));
-      });
-      if (p.bibtex) {
-        const btn = el('button', { class: 'btn', type:'button' }, ['BibTeX']);
-        const pre = el('pre', { style:'display:none; white-space:pre-wrap; background:var(--bg); border:1px solid var(--border); padding:12px; border-radius:10px; margin-top:8px;' }, [p.bibtex]);
-        btn.addEventListener('click', () => { pre.style.display = pre.style.display === 'none' ? 'block' : 'none'; });
-        head.appendChild(btn); head.appendChild(pre);
-      }
+      Object.entries(p.links).forEach(([label, url]) => { if (url) btns.appendChild(el('a', { class:'btn', href:url, target:'_blank', rel:'noopener' }, [label.toUpperCase()])); });
       head.appendChild(btns);
-      list.appendChild(el('li', {}, [head]));
-    });
+    }
+    return head;
+  }
+
+  function renderPapers() {
+    const inprog = document.getElementById('papersInProgress'); inprog.replaceChildren();
+    SITE_DATA.research.in_progress.forEach(p => inprog.appendChild(el('li', {}, [paperCard(p)])));
+
+    const peer = document.getElementById('papersPeer'); peer.replaceChildren();
+    SITE_DATA.research.peer_reviewed
+      .sort((a,b) => (b.year||0)-(a.year||0))
+      .forEach(p => peer.appendChild(el('li', {}, [paperCard(p)])));
   }
 
   function renderProjects() {
-    const grid = $('#projectsGrid'); grid.replaceChildren();
+    const grid = document.getElementById('projectsGrid'); grid.replaceChildren();
     SITE_DATA.projects.forEach(pr => {
       const card = el('div', { class:'card' }, [
         el('div', { html: `<strong>${pr.title}</strong>` }),
@@ -337,12 +515,12 @@
   }
 
   function renderAwards() {
-    const list = $('#awardsList'); list.replaceChildren();
+    const list = document.getElementById('awardsList'); list.replaceChildren();
     SITE_DATA.awards.forEach(a => {
       const line = el('li', {}, [
         el('div', { class:'card' }, [
           el('div', { class:'meta' }, [String(a.year || '')]),
-          el('div', { html: a.url ? `<strong><a href="${a.url}" target="_blank" rel="noopener">${a.title}</a></strong>` : `<strong>${a.title}</strong>` }),
+          el('div', { html: `<strong>${a.title}</strong>` }),
           a.by ? el('div', { class:'meta' }, [a.by]) : null
         ].filter(Boolean))
       ]);
@@ -350,12 +528,58 @@
     });
   }
 
-  function renderPhotos() {
-    const g = $('#gallery'); g.replaceChildren();
-    SITE_DATA.photos.forEach(ph => {
-      const img = el('img', { src: ph.src, alt: ph.alt || '' });
-      g.appendChild(img);
+  function renderEducation() {
+    const list = document.getElementById('eduList'); list.replaceChildren();
+    SITE_DATA.education.forEach(e => {
+      const body = el('div', { class:'card' }, [
+        el('div', { class:'meta' }, [e.period + (e.cgpa ? ` • CGPA: ${e.cgpa}` : '')]),
+        el('div', { html: `<strong>${e.degree}</strong> at ${e.org}` }),
+        e.thesis_title ? el('div', { class:'meta' }, ["Thesis: " + e.thesis_title]) : null,
+        e.thesis_desc ? el('div', { class:'meta' }, [e.thesis_desc]) : null,
+        e.thesis_abstract ? el('div', { class:'meta' }, [e.thesis_abstract]) : null
+      ].filter(Boolean));
+      list.appendChild(el('li', {}, [body]));
     });
+  }
+
+  function renderExperience() {
+    const list = document.getElementById('expList'); list.replaceChildren();
+    SITE_DATA.experience.forEach(x => {
+      const body = el('div', { class:'card' }, [
+        el('div', { class:'meta' }, [x.period]),
+        el('div', { html: `<strong>${x.role}</strong> — ${x.org}` }),
+        x.bullets && x.bullets.length ? el('ul', { class:'clean', style:'margin-top:8px' }, x.bullets.map(b => el('li', {}, [b]))) : null
+      ].filter(Boolean));
+      list.appendChild(el('li', {}, [body]));
+    });
+  }
+
+  function renderTeaching() {
+    const list = document.getElementById('teachList'); list.replaceChildren();
+    SITE_DATA.teaching.forEach(t => list.appendChild(el('li', {}, [ el('div', { class:'card' }, [t]) ])));
+  }
+
+  function renderSkillsCoursework() {
+    const s = SITE_DATA.skills;
+    const skills = document.getElementById('skillsList');
+    const cw = document.getElementById('courseworkList');
+
+    skills.replaceChildren(
+      el('div', { html: `<strong>Languages:</strong> ${s.languages.join(', ')}` }),
+      el('div', { html: `<strong>Frameworks:</strong> ${s.frameworks.join(', ')}` }),
+      el('div', { html: `<strong>Platforms:</strong> ${s.platforms.join(', ')}` }),
+      el('div', { html: `<strong>IDEs:</strong> ${s.ides.join(', ')}` }),
+      el('div', { html: `<strong>Other:</strong> ${s.misc.join(', ')}` })
+    );
+
+    cw.replaceChildren(
+      el('div', { html: `<strong>Coursework:</strong> ${SITE_DATA.coursework.join(' • ')}` })
+    );
+  }
+
+  function renderPhotos() {
+    const g = document.getElementById('gallery'); g.replaceChildren();
+    SITE_DATA.photos.forEach(ph => g.appendChild(el('img', { src: ph.src, alt: ph.alt || '' })));
   }
 
   function initTheme() {
@@ -367,7 +591,6 @@
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
     });
-    // Default to system preference
     if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       document.documentElement.setAttribute('data-theme', 'dark');
     }
@@ -381,27 +604,31 @@
     renderPapers();
     renderProjects();
     renderAwards();
+    renderEducation();
+    renderExperience();
+    renderTeaching();
+    renderSkillsCoursework();
     renderPhotos();
     initTheme();
     renderFooterYear();
   });
 </script>
 
-<!-- Optional: Basic JSON-LD schema for a Person; fill in your details. -->
+<!-- Basic JSON-LD schema for a Person -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Your Name",
-  "email": "mailto:your.email@example.com",
+  "name": "Mohammed Shahmir Khan",
+  "email": ["mailto:100059811@ku.ac.ae", "mailto:kshahmir49@gmail.com"],
+  "telephone": "+971502149427",
   "url": "https://your-username.github.io/",
-  "affiliation": {"@type":"Organization","name":"Your Institution"},
-  "sameAs": [
-    "https://scholar.google.com/citations?user=XXXX",
-    "https://orcid.org/0000-0000-0000-0000",
-    "https://github.com/your-username",
-    "https://www.linkedin.com/in/your-handle/"
-  ]
+  "affiliation": {"@type":"Organization","name":"Khalifa University of Science and Technology"},
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Abu Dhabi",
+    "addressCountry": "AE"
+  }
 }
 </script>
 </body>
