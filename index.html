@@ -108,8 +108,7 @@
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#teaching">Teaching</a>
-      <a href="#skills">Skills</a>
-      <a href="#photos">Photos</a>
+      <a href="#photos">Gallery</a>
       <a href="#contact">Contact</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">Toggle theme</button>
     </nav>
@@ -164,14 +163,6 @@
     <ul class="clean teaching" id="teachList"></ul>
   </section>
 
-  <section id="skills" aria-labelledby="skills-h">
-    <h2 id="skills-h">Skills & Coursework</h2>
-    <div class="twocol">
-      <div class="card" id="skillsList"></div>
-      <div class="card" id="courseworkList"></div>
-    </div>
-  </section>
-
   <section id="photos" aria-labelledby="photos-h">
     <h2 id="photos-h">Photos</h2>
     <div class="gallery" id="gallery"></div>
@@ -182,7 +173,6 @@
     <div class="card">
       <p><strong>Email (academic):</strong> <a id="emailLink1" href="mailto:100059811@ku.ac.ae">100059811@ku.ac.ae</a></p>
       <p><strong>Email (personal):</strong> <a id="emailLink2" href="mailto:kshahmir49@gmail.com">kshahmir49@gmail.com</a></p>
-      <p><strong>Phone:</strong> <a href="tel:+971502149427">+971 50 214 9427</a></p>
       <p id="locationBlock"><strong>Location:</strong> Abu Dhabi, UAE</p>
     </div>
   </section>
@@ -378,31 +368,6 @@
       "Teaching assistant for 1 semester - Programming with C++"
     ],
 
-    coursework: [
-      "Machine Learning",
-      "Artificial Intelligence",
-      "Deep Learning",
-      "Bioinformatics",
-      "Engineering Numerical Methods",
-      "Algorithm Design Techniques",
-      "Data Science",
-      "Distributed Systems and Cloud Computing",
-      "Software Engineering",
-      "Business Analytics",
-      "Blockchain Fundamentals and Applications",
-      "Advanced Computer Vision Paradigms",
-      "Advance Computer Networks",
-      "High Performance Computing"
-    ],
-
-    skills: {
-      languages: ["C", "C++", "Java", "Python", "SQL", "Solidity"],
-      frameworks: ["Spring", "Spring Boot", "Django", "PyTorch", "Keras", "TensorFlow", "Angular", "Unity"],
-      platforms: ["Windows", "Linux", "macOS"],
-      ides: ["Visual Studio", "NetBeans", "PyCharm", "Jupyter", "Eclipse", "Remix IDE"],
-      misc: ["Data Structures & Algorithms", "Competitive Programming"]
-    },
-
     Gallery: [
       { src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop", alt: "Sunrise over mountains" },
       { src: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop", alt: "City skyline at dusk" },
@@ -526,24 +491,6 @@
     SITE_DATA.teaching.forEach(t => list.appendChild(el('li', {}, [ el('div', { class:'card' }, [t]) ])));
   }
 
-  function renderSkillsCoursework() {
-    const s = SITE_DATA.skills;
-    const skills = document.getElementById('skillsList');
-    const cw = document.getElementById('courseworkList');
-
-    skills.replaceChildren(
-      el('div', { html: `<strong>Languages:</strong> ${s.languages.join(', ')}` }),
-      el('div', { html: `<strong>Frameworks:</strong> ${s.frameworks.join(', ')}` }),
-      el('div', { html: `<strong>Platforms:</strong> ${s.platforms.join(', ')}` }),
-      el('div', { html: `<strong>IDEs:</strong> ${s.ides.join(', ')}` }),
-      el('div', { html: `<strong>Other:</strong> ${s.misc.join(', ')}` })
-    );
-
-    cw.replaceChildren(
-      el('div', { html: `<strong>Coursework:</strong> ${SITE_DATA.coursework.join(' • ')}` })
-    );
-  }
-
   function renderPhotos() {
     const g = document.getElementById('gallery'); g.replaceChildren();
     SITE_DATA.photos.forEach(ph => g.appendChild(el('img', { src: ph.src, alt: ph.alt || '' })));
@@ -573,7 +520,6 @@
     renderEducation();
     renderExperience();
     renderTeaching();
-    <!-- renderSkillsCoursework(); -->
     renderPhotos();
     initTheme();
     renderFooterYear();
@@ -587,8 +533,7 @@
   "@type": "Person",
   "name": "Shahmir Khan",
   "email": ["mailto:100059811@ku.ac.ae", "mailto:kshahmir49@gmail.com"],
-  "telephone": "+971502149427",
-  "url": "https://your-username.github.io/",
+  "url": "https://kshahmir49.github.io/",
   "affiliation": {"@type":"Organization","name":"Khalifa University of Science and Technology"},
   "address": {
     "@type": "PostalAddress",
