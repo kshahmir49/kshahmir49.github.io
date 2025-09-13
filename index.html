@@ -65,7 +65,7 @@
     .hero .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; }
     .hero h1 { font-size: clamp(28px, 4vw, 42px); line-height: 1.2; margin: 0 0 10px; }
     .hero p.lead { color: var(--muted); margin: 0; }
-    .avatar { width: 200px; aspect-ratio: 0.75; border-radius: 20px; object-fit: cover; border: 1px solid var(--border); }
+    .avatar { width: 185px; aspect-ratio: 0.8; border-radius: 20px; object-fit: cover; border: 1px solid var(--border); }
 
     section { padding: 28px 0; }
     section h2 { font-size: 22px; margin: 0 0 16px; }
@@ -389,7 +389,6 @@
   // === Renderers ============================================================
   function renderPerson() {
     document.title = `${SITE_DATA.person.name} — Personal Website`;
-    document.querySelector('.brand span:last-child').textContent = SITE_DATA.person.name;
     document.querySelector('h1').textContent = SITE_DATA.person.name;
     document.querySelector('.lead').textContent = SITE_DATA.person.tagline || '';
     document.getElementById('emailLink1').textContent = SITE_DATA.person.email1;
