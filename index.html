@@ -102,6 +102,16 @@
     /* Hide a section's body while collapsed, but keep its <h2>/<button> visible */
     section.collapsed > :not(h2):not(.section-toggle) { display: none !important; }
 
+    .socials { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
+    .icon-btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:40px; height:40px; border:1px solid var(--border);
+      border-radius:999px; background: var(--surface); color: inherit;
+      box-shadow: var(--shadow); text-decoration:none;
+    }
+    .icon-btn:hover { background: color-mix(in oklab, var(--accent) 12%, var(--surface)); }
+    .icon-btn svg { width:20px; height:20px; fill: currentColor; }
+
     @media (max-width: 980px) {
       .hero { grid-template-columns: 1fr; }
       .nav { gap: 8px; }
@@ -137,6 +147,7 @@
         <p>Graduate researcher with interests in digital twins, multi-agent systems, reinforcement learning, and generative AI.</p>
       </div>
     </div>
+    <div class="socials" id="socialLinks" aria-label="Social links"></div>
     <div style="display:flex;justify-content:center">
       <img class="avatar" src="shahmir.jpg" alt="Portrait of Mohammed Shahmir Khan"/>
     </div>
@@ -217,7 +228,10 @@
       phone: "+971 50 214 9427",
       location: "Abu Dhabi, UAE",
       avatar: "shahmir.jpg",
-      socials: [],
+      socials: [
+        { name: "Google Scholar", url: "https://scholar.google.com/citations?user=lU6d2EYAAAAJ" },
+        { name: "GitHub", url: "https://github.com/kshahmir49" }
+      ],
       tagline: "Ph.D. Candidate, Computer Science • Khalifa University"
     },
     research: {
@@ -294,8 +308,45 @@
     document.getElementById('emailLink2').textContent = SITE_DATA.person.email2;
     document.getElementById('emailLink2').href = `mailto:${SITE_DATA.person.email2}`;
     document.getElementById('locationBlock').innerHTML = `<strong>Location:</strong> ${SITE_DATA.person.location}`;
+
     const avatar = document.querySelector('.avatar');
     avatar.src = SITE_DATA.person.avatar; avatar.alt = `Portrait of ${SITE_DATA.person.name}`;
+
+    // --- Social icons (Scholar + GitHub) ---
+    const holder = document.getElementById('socialLinks');
+    if (holder) {
+      holder.replaceChildren();
+      const icons = {
+        'google scholar': `
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <!-- simple mortarboard icon -->
+            <path d="M12 3 2 8l10 5 10-5-5-2.5" />
+            <path d="M7 12.5V16c0 2 5 3 5 3s5-1 5-3v-3.5l-5 2.3-5-2.3" />
+          </svg>`,
+        'github': `
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <!-- generic code-brackets icon to represent GitHub -->
+            <path d="M8 4 3 12l5 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 4 21 12l-5 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>`
+      };
+
+      (SITE_DATA.person.socials || []).forEach(s => {
+        const key = (s.name || '').toLowerCase();
+        const icon = icons[key] || `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>`;
+        holder.appendChild(
+          el('a', {
+            class:'icon-btn',
+            href: s.url,
+            target: '_blank',
+            rel: 'noopener',
+            'aria-label': s.name,
+            title: s.name,
+            html: icon
+          })
+        );
+      });
+    }
   }
 
   function paperCard(p) {
