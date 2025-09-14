@@ -145,9 +145,9 @@
         <p class="lead">Ph.D. Candidate, Computer Science • Khalifa University • Abu Dhabi, UAE</p>
         <p>Academic Advisors: Dr. Shakti Singh, Dr. Rabeb Mizouni, Prof. Hadi Otrok</p>
         <p>Graduate researcher with interests in digital twins, multi-agent systems, reinforcement learning, and generative AI.</p>
+        <div class="socials" id="socialLinks" aria-label="Social links"></div>
       </div>
     </div>
-    <div class="socials" id="socialLinks" aria-label="Social links"></div>
     <div style="display:flex;justify-content:center">
       <img class="avatar" src="shahmir.jpg" alt="Portrait of Mohammed Shahmir Khan"/>
     </div>
@@ -310,30 +310,27 @@
     document.getElementById('locationBlock').innerHTML = `<strong>Location:</strong> ${SITE_DATA.person.location}`;
 
     const avatar = document.querySelector('.avatar');
-    avatar.src = SITE_DATA.person.avatar; avatar.alt = `Portrait of ${SITE_DATA.person.name}`;
+    avatar.src = SITE_DATA.person.avatar; 
+    avatar.alt = `Portrait of ${SITE_DATA.person.name}`;
 
-    // --- Social icons (Scholar + GitHub) ---
+    // --- Social icons (actual brand logos via Simple Icons CDN) ---
     const holder = document.getElementById('socialLinks');
     if (holder) {
       holder.replaceChildren();
-      const icons = {
-        'google scholar': `
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <!-- simple mortarboard icon -->
-            <path d="M12 3 2 8l10 5 10-5-5-2.5" />
-            <path d="M7 12.5V16c0 2 5 3 5 3s5-1 5-3v-3.5l-5 2.3-5-2.3" />
-          </svg>`,
-        'github': `
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <!-- generic code-brackets icon to represent GitHub -->
-            <path d="M8 4 3 12l5 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16 4 21 12l-5 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>`
+
+      const slugFor = (name) => {
+        const key = (name || '').toLowerCase();
+        if (key.includes('google scholar')) return 'googlescholar';
+        if (key.includes('github')) return 'github';
+        return null;
       };
 
       (SITE_DATA.person.socials || []).forEach(s => {
-        const key = (s.name || '').toLowerCase();
-        const icon = icons[key] || `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>`;
+        const slug = slugFor(s.name);
+        const icon = slug 
+          ? `<img class="icon-img" src="https://cdn.simpleicons.org/${slug}" alt="${s.name} logo" loading="lazy" decoding="async" />`
+          : `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>`; // fallback
+
         holder.appendChild(
           el('a', {
             class:'icon-btn',
